@@ -72,6 +72,15 @@ const CameraScreen = ({ navigation }) => {
     else setFaceOnscreen(false);
   };
 
+  let valence = sp => {
+      sp *= 100
+      if (sp < 1.5) return .05
+      if (sp < 8) return .06 * sp - .04
+      if (sp < 85) return .004 * sp + .43
+      sp -= 85
+      return sp / 150 + .9
+  } 
+
   if (pressed) {
     return (
       <View
@@ -134,6 +143,7 @@ const CameraScreen = ({ navigation }) => {
                                          'rightEyeOpenProbability',
                                          'yawAngle',
                                          'rollAngle'], "\n")}</Text>
+        <Text style={{fontSize: 17, paddingBottom: 5}}>Predicted Valence: {faces.length > 0 && valence(faces[0].smilingProbability)}</Text>
         <TouchableOpacity
           onPress={takePic}
           style={{
