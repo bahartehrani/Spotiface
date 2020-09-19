@@ -13,7 +13,7 @@ const CameraScreen = ({ navigation }) => {
   const [faces, setFaces] = useState([]);
   const [pressed, setPressed] = useState(false);
   const [faceOnscreen, setFaceOnscreen] = useState(false);
-  this.camera = null;
+
   //TODO move this to earlier screen
   useEffect(() => {
     (async () => {
@@ -29,9 +29,11 @@ const CameraScreen = ({ navigation }) => {
 
   let takePic = async () => {
     if (this.camera) {
+      this.camera.resumePreview();
       photo = await this.camera.takePictureAsync();
       this.camera.pausePreview();
-      setPressed(true);
+      confirm();
+      //setPressed(true);
     } else {
       console.log("camera not set.");
     }
@@ -126,21 +128,12 @@ const CameraScreen = ({ navigation }) => {
             }}
           />
         </View>
-        <Text style={{ fontSize: 18, marginHorizontal: 20, marginBottom: 0 }}>
-          Smile:{" "}
-          {faces.length > 0
-            ? (faces[0].smilingProbability * 100).toFixed(2)
-            : "      "}
-          % Left:{" "}
-          {faces.length > 0
-            ? (faces[0].leftEyeOpenProbability * 100).toFixed(2)
-            : "      "}
-          % Right:{" "}
-          {faces.length > 0
-            ? (faces[0].rightEyeOpenProbability * 100).toFixed(2)
-            : "      "}
-          %
-        </Text>
+        <Text style={{fontSize: 17, paddingLeft: 5}}>{JSON.stringify(faces[0], 
+                                        ['smilingProbability',
+                                         'leftEyeOpenProbability',
+                                         'rightEyeOpenProbability',
+                                         'yawAngle',
+                                         'rollAngle'], "\n")}</Text>
         <TouchableOpacity
           onPress={takePic}
           style={{
