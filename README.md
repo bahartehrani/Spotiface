@@ -1,6 +1,3 @@
-This is CODEIT-19's submission for HackMIT 2020.
-Team members:
-- David Buffkin
-- Andy Wu
-- Benjamin Gao
-- Bahar Tehranipoor
+Welcome to Spotiface, an entirely new listening experience.
+
+Not sure what you want to listen to? We know. Just take a picture of your face, and we'll create a Spotify playlist for you best suited to match how you are currently feeling. What more could you want!
